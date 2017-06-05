@@ -36,11 +36,17 @@ class Group implements RoutesInterface
      */
     public function setPrefix(?string $prefix)
     {
-        if ($prefix && $this->prefix) {
-            $this->prefix .= '/' . $prefix;
-        } elseif ($prefix) {
+        if (!$prefix) {
+            return;
+
+        }
+        if ($this->prefix) {
+            $this->prefix = $prefix . '/' . $this->prefix;
+        } else {
             $this->prefix = $prefix;
         }
+
+        $this->updatePrefix();
     }
 
     /**
