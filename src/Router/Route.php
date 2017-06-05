@@ -30,7 +30,13 @@ class Route implements RouteInterface
     private $method = Request::METHOD_GET;
 
     /**
+     * @var string
+     */
+    private $prefix;
+
+    /**
      * Route constructor.
+     *
      * @param null|string $controller
      * @param null|string $action
      * @param null|string $pattern
@@ -70,6 +76,10 @@ class Route implements RouteInterface
      */
     public function getPattern(): ?string
     {
+        if ($this->prefix) {
+            return $this->prefix . '/' . $this->pattern;
+        }
+
         return $this->pattern;
     }
 
@@ -79,5 +89,13 @@ class Route implements RouteInterface
     public function getMethod(): string
     {
         return $this->method;
+    }
+
+    /**
+     * @param null|string $prefix
+     */
+    public function setPrefix(?string $prefix)
+    {
+        $this->prefix = $prefix;
     }
 }

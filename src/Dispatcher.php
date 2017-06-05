@@ -4,8 +4,8 @@ namespace Nen;
 
 use Nen\Http\RequestInterface;
 use Nen\Http\ResponseInterface;
-use Nen\Router\GroupInterface;
 use Nen\Router\RouteInterface;
+use Nen\Router\RoutesInterface;
 use RuntimeException;
 
 /**
@@ -29,9 +29,9 @@ class Dispatcher implements DispatcherInterface
     private $route;
 
     /**
-     * @var GroupInterface
+     * @var RoutesInterface
      */
-    private $group;
+    private $routes;
 
     /**
      * @var array
@@ -44,19 +44,19 @@ class Dispatcher implements DispatcherInterface
      * @param RequestInterface $request
      * @param ResponseInterface $response
      * @param RouteInterface $route
-     * @param GroupInterface $group
+     * @param RoutesInterface $routes
      */
     public function __construct(
         RequestInterface $request,
         ResponseInterface $response,
         RouteInterface $route,
-        GroupInterface $group
+        RoutesInterface $routes
     )
     {
         $this->request = $request;
         $this->response = $response;
         $this->route = $route;
-        $this->group = $group;
+        $this->routes = $routes;
     }
 
     /**
@@ -84,7 +84,7 @@ class Dispatcher implements DispatcherInterface
      */
     private function setRouteByUrl(?string $url)
     {
-        foreach ($this->group->getRoutes() as $route) {
+        foreach ($this->routes->getRoutes() as $route) {
             if (preg_match('#^/' . $route->getPattern() . '$#isu', $url, $matches) &&
                 $this->request->getMethod() === $route->getMethod()
             ) {

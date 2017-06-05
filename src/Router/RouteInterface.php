@@ -5,7 +5,7 @@ namespace Nen\Router;
 /**
  * Interface RouteInterface
  */
-interface RouteInterface
+interface RouteInterface extends PrefixInterface
 {
     /**
      * @return null|string

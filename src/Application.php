@@ -2,15 +2,15 @@
 
 namespace Nen;
 
-use Nen\Web\DefaultController;
+use Exception;
 use Nen\Http\ContentInterface;
 use Nen\Http\Request;
 use Nen\Http\RequestInterface;
 use Nen\Http\Response;
 use Nen\Http\ResponseInterface;
-use Nen\Router\GroupInterface;
 use Nen\Router\Route;
-use Exception;
+use Nen\Router\RoutesInterface;
+use Nen\Web\DefaultController;
 
 /**
  * Class Application
@@ -35,9 +35,9 @@ class Application
     /**
      * Application constructor.
      *
-     * @param GroupInterface $group
+     * @param RoutesInterface $routes
      */
-    public function __construct(GroupInterface $group)
+    public function __construct(RoutesInterface $routes)
     {
         $this->request = new Request();
         $this->response = new Response();
@@ -45,12 +45,12 @@ class Application
             $this->request,
             $this->response,
             new Route(DefaultController::class, 'notFound', ''),
-            $group
+            $routes
         );
     }
 
     /**
-     * Run Nenlication
+     * Run application
      */
     public function run()
     {

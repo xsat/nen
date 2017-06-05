@@ -5,8 +5,13 @@ namespace Nen\Router;
 /**
  * Class Group
  */
-class Group implements GroupInterface
+class Group implements RoutesInterface
 {
+    /**
+     * @var string
+     */
+    private $prefix;
+
     /**
      * @var RouteInterface[]
      */
@@ -15,11 +20,37 @@ class Group implements GroupInterface
     /**
      * Group constructor.
      *
+     * @param null|string $prefix
      * @param RouteInterface[] $routes
      */
-    public function __construct(array $routes = [])
+    public function __construct(?string $prefix, array $routes = [])
     {
+        $this->prefix = $prefix;
         $this->routes = $routes;
+
+        $this->updatePrefix();
+    }
+
+    /**
+     * @param null|string $prefix
+     */
+    public function setPrefix(?string $prefix)
+    {
+        if ($prefix && $this->prefix) {
+            $this->prefix .= '/' . $prefix;
+        } elseif ($prefix) {
+            $this->prefix = $prefix;
+        }
+    }
+
+    /**
+     * Sets prefix in all routes
+     */
+    private function updatePrefix()
+    {
+        foreach ($this->routes as $route) {
+            $route->setPrefix($this->prefix);
+        }
     }
 
     /**
@@ -28,17 +59,5 @@ class Group implements GroupInterface
     public function getRoutes(): array
     {
         return $this->routes;
-    }
-
-    /**
-     * @param RouteInterface $route
-     *
-     * @return GroupInterface
-     */
-    public function addRoute(RouteInterface $route): GroupInterface
-    {
-        $this->routes[] = $route;
-
-        return $this;
     }
 }
