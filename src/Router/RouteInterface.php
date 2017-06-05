@@ -8,14 +8,14 @@ namespace Nen\Router;
 interface RouteInterface extends PrefixInterface
 {
     /**
-     * @return null|string
+     * @return string
      */
-    public function getController(): ?string;
+    public function getController(): string;
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getAction(): ?string;
+    public function getAction(): string;
 
     /**
      * @return null|string

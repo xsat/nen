@@ -37,14 +37,14 @@ class Route implements RouteInterface
     /**
      * Route constructor.
      *
-     * @param null|string $controller
-     * @param null|string $action
+     * @param string $controller
+     * @param string $action
      * @param null|string $pattern
      * @param null|string $method
      */
     public function __construct(
-        ?string $controller = null,
-        ?string $action = null,
+        string $controller = null,
+        string $action = null,
         ?string $pattern = null,
         ?string $method = null
     )
@@ -56,17 +56,17 @@ class Route implements RouteInterface
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getController(): ?string
+    public function getController(): string
     {
         return $this->controller;
     }
 
     /**
-     * @return null|string
+     * @return string
      */
-    public function getAction(): ?string
+    public function getAction(): string
     {
         return $this->action;
     }
@@ -77,7 +77,11 @@ class Route implements RouteInterface
     public function getPattern(): ?string
     {
         if ($this->prefix) {
-            return $this->prefix . '/' . $this->pattern;
+            if ($this->pattern) {
+                return $this->prefix . '/' . $this->pattern;
+            }
+
+            return $this->prefix;
         }
 
         return $this->pattern;
