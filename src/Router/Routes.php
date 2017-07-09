@@ -8,7 +8,7 @@ namespace Nen\Router;
 class Routes implements RoutesInterface
 {
     /**
-     * @var RoutesInterface[]
+     * @var RouteInterface[]|PrefixInterface[]
      */
     private $routes = [];
 
@@ -19,7 +19,19 @@ class Routes implements RoutesInterface
      */
     public function __construct(array $routes)
     {
-        $this->routes = $routes;
+        foreach ($routes as $route) {
+            $this->addRoutes($route);
+        }
+    }
+
+    /**
+     * @param RoutesInterface RoutesInterface
+     */
+    private function addRoutes(RoutesInterface $routes): void
+    {
+        foreach ($routes->getRoutes() as $route) {
+            $this->routes[] = $route;
+        }
     }
 
     /**

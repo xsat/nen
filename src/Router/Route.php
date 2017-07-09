@@ -76,11 +76,13 @@ class Route implements RouteInterface, PrefixInterface, RoutesInterface
      */
     public function getPattern(): ?string
     {
+        $patterns = array_reverse($this->prefixes);
+
         if ($this->pattern) {
-            $this->prefixes[] = $this->pattern;
+            $patterns[] = $this->pattern;
         }
 
-        return implode('/', $this->prefixes);
+        return implode('/', $patterns);
     }
 
     /**
