@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php"
+         backupGlobals="true"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         stopOnFailure="false">
+    <testsuites>
+        <testsuite name="Tests">
+            <file>/tests/RequestTest.php</file>
+            <file>/tests/SomeTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>
