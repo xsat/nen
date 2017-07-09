@@ -7,5 +7,5 @@ namespace Nen;
  */
 interface DispatcherInterface
 {
-    public function dispatch();
+    public function dispatch(): void;
 }

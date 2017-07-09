@@ -52,7 +52,7 @@ class Application
     /**
      * Run application
      */
-    public function run()
+    public function run(): void
     {
         try {
             $this->dispatcher->dispatch();

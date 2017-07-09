@@ -10,7 +10,7 @@ class DefaultController extends Controller
     /**
      * 404 page
      */
-    public function notFoundAction()
+    public function notFoundAction(): void
     {
         $this->response->setStatusCode(404);
         $this->response->setContent('Page not found');

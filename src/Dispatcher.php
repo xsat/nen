@@ -62,7 +62,7 @@ class Dispatcher implements DispatcherInterface
     /**
      * Creates a controller and handles an action
      */
-    public function dispatch()
+    public function dispatch(): void
     {
         $url = $this->request->get('_url');
         $this->setRouteByUrl($url);
@@ -82,7 +82,7 @@ class Dispatcher implements DispatcherInterface
     /**
      * @param null|string $url
      */
-    private function setRouteByUrl(?string $url)
+    private function setRouteByUrl(?string $url): void
     {
         foreach ($this->routes->getRoutes() as $route) {
             if ((preg_match('#^/' . $route->getPattern() . '$#isu', $url, $matches) ||
