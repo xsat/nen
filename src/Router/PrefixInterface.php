@@ -8,7 +8,7 @@ namespace Nen\Router;
 interface PrefixInterface
 {
     /**
-     * @param null|string $prefix
+     * @param string $prefix
      */
-    public function setPrefix(?string $prefix);
+    public function addPrefix(string $prefix): void;
 }

@@ -8,62 +8,38 @@ namespace Nen\Router;
 class Group implements RoutesInterface
 {
     /**
-     * @var string
-     */
-    private $prefix;
-
-    /**
-     * @var RouteInterface[]
+     * @var RoutesInterface
      */
     private $routes = [];
 
     /**
      * Group constructor.
      *
-     * @param null|string $prefix
-     * @param RouteInterface[] $routes
+     * @param string $prefix
+     * @param RoutesInterface $routes
      */
-    public function __construct(?string $prefix, array $routes = [])
+    public function __construct(string $prefix, RoutesInterface $routes)
     {
-        $this->prefix = $prefix;
         $this->routes = $routes;
 
-        $this->updatePrefix();
+        $this->addPrefix($prefix);
     }
 
     /**
-     * @param null|string $prefix
+     * @param string $prefix
      */
-    public function setPrefix(?string $prefix)
+    private function addPrefix(string $prefix): void
     {
-        if (!$prefix) {
-            return;
-
-        }
-        if ($this->prefix) {
-            $this->prefix = $prefix . '/' . $this->prefix;
-        } else {
-            $this->prefix = $prefix;
-        }
-
-        $this->updatePrefix();
-    }
-
-    /**
-     * Sets prefix in all routes
-     */
-    private function updatePrefix()
-    {
-        foreach ($this->routes as $route) {
-            $route->setPrefix($this->prefix);
+        foreach ($this->routes->getRoutes() as $route) {
+            $route->addPrefix($prefix);
         }
     }
 
     /**
-     * @return RouteInterface[]
+     * {@inheritdoc}
      */
     public function getRoutes(): array
     {
-        return $this->routes;
+        return $this->routes->getRoutes();
     }
 }

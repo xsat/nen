@@ -5,10 +5,10 @@ namespace Nen\Router;
 /**
  * Interface RoutesInterface
  */
-interface RoutesInterface extends PrefixInterface
+interface RoutesInterface
 {
     /**
-     * @return RouteInterface[]
+     * @return RouteInterface[]|PrefixInterface[]
      */
     public function getRoutes(): array;
 }

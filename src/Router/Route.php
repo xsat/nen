@@ -7,7 +7,7 @@ use Nen\Http\Request;
 /**
  * Class Route
  */
-class Route implements RouteInterface
+class Route implements RouteInterface, PrefixInterface, RoutesInterface
 {
     /**
      * @var string
@@ -30,9 +30,9 @@ class Route implements RouteInterface
     private $method = Request::METHOD_GET;
 
     /**
-     * @var string
+     * @var array
      */
-    private $prefix;
+    private $prefixes = [];
 
     /**
      * Route constructor.
@@ -76,15 +76,11 @@ class Route implements RouteInterface
      */
     public function getPattern(): ?string
     {
-        if ($this->prefix) {
-            if ($this->pattern) {
-                return $this->prefix . '/' . $this->pattern;
-            }
-
-            return $this->prefix;
+        if ($this->pattern) {
+            $this->prefixes[] = $this->pattern;
         }
 
-        return $this->pattern;
+        return implode('/', $this->prefixes);
     }
 
     /**
@@ -96,10 +92,18 @@ class Route implements RouteInterface
     }
 
     /**
-     * @param null|string $prefix
+     * @param string $prefix
      */
-    public function setPrefix(?string $prefix)
+    public function addPrefix(string $prefix): void
     {
-        $this->prefix = $prefix;
+        $this->prefixes[] = $prefix;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoutes(): array
+    {
+        return [$this];
     }
 }
