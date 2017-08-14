@@ -5,9 +5,9 @@ namespace Nen\Validation\Validator;
 use Nen\Validation\ValuesInterface;
 
 /**
- * Class Alpha
+ * Class Numerical
  */
-class Alpha extends Validator
+class Numerical extends Validator
 {
     /**
      * @param ValuesInterface $values
@@ -17,6 +17,6 @@ class Alpha extends Validator
     public function validate(ValuesInterface $values): bool
     {
         $value = $values->getValue($this->getName());
-        return ctype_alpha($value);
+        return preg_match('/^-?\d+\.?\d*$/', $value);
     }
 }
