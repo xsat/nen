@@ -71,9 +71,9 @@ class Request implements RequestInterface
      *
      * @return mixed
      */
-    public function get(string $name, $defaultValue = null)
+    public function get(string $name = null, $defaultValue = null)
     {
-        return $_REQUEST[$name] ?? null;
+        return !$name ? $_REQUEST : $_REQUEST[$name] ?? null;
     }
 
     /**
@@ -84,9 +84,9 @@ class Request implements RequestInterface
      *
      * @return mixed
      */
-    public function getPost(string $name, $defaultValue = null)
+    public function getPost(string $name = null, $defaultValue = null)
     {
-        return $_POST[$name] ?? null;
+        return !$name ? $_POST : $_POST[$name] ?? null;
     }
 
     /**
@@ -97,9 +97,9 @@ class Request implements RequestInterface
      *
      * @return mixed
      */
-    public function getQuery(string $name, $defaultValue = null)
+    public function getQuery(string $name = null, $defaultValue = null)
     {
-        return $_GET[$name] ?? null;
+        return !$name ? $_GET : $_GET[$name] ?? null;
     }
 
     /**
@@ -110,9 +110,11 @@ class Request implements RequestInterface
      *
      * @return mixed
      */
-    public function getPut(string $name, $defaultValue = null)
+    public function getPut(string $name = null, $defaultValue = null)
     {
-        return $this->getContent()[$name] ?? null;
+        $content = $this->getContent();
+
+        return !$name ? $content : $content[$name] ?? null;
     }
 
     /**
