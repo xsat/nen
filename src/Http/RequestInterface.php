@@ -41,7 +41,7 @@ interface RequestInterface
      *
      * @return mixed
      */
-    public function get(string $name, $default = null);
+    public function get(string $name = null, $default = null);
 
     /**
      * @param string $name
@@ -49,7 +49,7 @@ interface RequestInterface
      *
      * @return mixed
      */
-    public function getPost(string $name, $default = null);
+    public function getPost(string $name = null, $default = null);
 
     /**
      * @param string $name
@@ -57,7 +57,7 @@ interface RequestInterface
      *
      * @return mixed
      */
-    public function getQuery(string $name, $default = null);
+    public function getQuery(string $name = null, $default = null);
 
     /**
      * @param string $name
@@ -65,7 +65,7 @@ interface RequestInterface
      *
      * @return mixed
      */
-    public function getPut(string $name, $default = null);
+    public function getPut(string $name = null, $default = null);
 
     /**
      * @return int
