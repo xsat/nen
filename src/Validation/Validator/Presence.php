@@ -25,6 +25,6 @@ class Presence extends Validator
     public function validate(ValuesInterface $values): bool
     {
         $value = $values->getValue($this->getName());
-        return $value === null || $value === '';
+        return $value !== null && $value !== '' && $value !== [];
     }
 }
