@@ -15,7 +15,7 @@ interface ValidatorInterface
     /**
      * @return string
      */
-    public function getName(): string;
+    public function getField(): string;
 
     /**
      * @return MessageInterface
@@ -23,6 +23,8 @@ interface ValidatorInterface
     public function getMessage(): MessageInterface;
 
     /**
+     * @param ValuesInterface
+     *
      * @return bool
      */
     public function validate(ValuesInterface $values): bool;

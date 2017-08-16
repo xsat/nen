@@ -93,7 +93,7 @@ class Response implements ResponseInterface, ContentInterface
      */
     public function setJsonContent($content): ResponseInterface
     {
-        return $this->setContentType('Nenlication/json', 'UTF-8')
+        return $this->setContentType('application/json', 'UTF-8')
             ->setContent(json_encode($content));
     }
 

@@ -8,7 +8,7 @@ namespace Nen\Validation;
 interface ValidationInterface
 {
     /**
-     * @param array $data
+     * @param ValuesInterface $values
      *
      * @return bool
      */

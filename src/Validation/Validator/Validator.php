@@ -15,7 +15,7 @@ abstract class Validator implements ValidatorInterface
     /**
      * @var string
      */
-    private $name;
+    private $field;
 
     /**
      * @var string
@@ -24,12 +24,13 @@ abstract class Validator implements ValidatorInterface
 
     /**
      * Validator constructor.
-     * @param string $name
+     *
+     * @param string $field
      * @param string $message
      */
-    public function __construct(string $name, string $message)
+    public function __construct(string $field, string $message)
     {
-        $this->name = $name;
+        $this->field = $field;
         $this->message = $message;
     }
 
@@ -44,9 +45,9 @@ abstract class Validator implements ValidatorInterface
     /**
      * @return string
      */
-    public function getName(): string
+    public function getField(): string
     {
-        return $this->name;
+        return $this->field;
     }
 
     /**
@@ -54,7 +55,7 @@ abstract class Validator implements ValidatorInterface
      */
     public function getMessage(): MessageInterface
     {
-        return new Message($this->name, $this->message);
+        return new Message($this->field, $this->message);
     }
 
     /**

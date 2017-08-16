@@ -68,7 +68,7 @@ interface RequestInterface
     public function getPut(string $name = null, $default = null);
 
     /**
-     * @return int
+     * @return string
      */
     public function getMethod(): string;
 }

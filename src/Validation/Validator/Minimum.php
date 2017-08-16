@@ -17,13 +17,13 @@ class Minimum extends Validator
     /**
      * Minimum constructor.
      *
-     * @param string $name
+     * @param string $field
      * @param int $min
      * @param string $message
      */
-    public function __construct(string $name, int $min, string $message)
+    public function __construct(string $field, int $min, string $message)
     {
-        parent::__construct($name, $message);
+        parent::__construct($field, $message);
         $this->min = $min;
     }
 
@@ -34,7 +34,7 @@ class Minimum extends Validator
      */
     public function validate(ValuesInterface $values): bool
     {
-        $value = $values->getValue($this->getName());
+        $value = $values->getValue($this->getField());
         return is_string($value) && mb_strlen($value) < $this->min;
     }
 }

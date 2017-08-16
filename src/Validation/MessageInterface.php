@@ -10,7 +10,7 @@ interface MessageInterface
     /**
      * @return string
      */
-    public function getName(): string;
+    public function getField(): string;
 
     /**
      * @return string

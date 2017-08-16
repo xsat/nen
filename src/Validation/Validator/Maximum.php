@@ -17,13 +17,13 @@ class Maximum extends Validator
     /**
      * Maximum constructor.
      *
-     * @param string $name
+     * @param string $field
      * @param int $max
      * @param string $message
      */
-    public function __construct(string $name, int $max, string $message)
+    public function __construct(string $field, int $max, string $message)
     {
-        parent::__construct($name, $message);
+        parent::__construct($field, $message);
         $this->max = $max;
     }
 
@@ -34,7 +34,7 @@ class Maximum extends Validator
      */
     public function validate(ValuesInterface $values): bool
     {
-        $value = $values->getValue($this->getName());
+        $value = $values->getValue($this->getField());
         return is_string($value) && mb_strlen($value) > $this->max;
     }
 }

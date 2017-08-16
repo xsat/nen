@@ -16,7 +16,7 @@ class Digit extends Validator
      */
     public function validate(ValuesInterface $values): bool
     {
-        $value = $values->getValue($this->getName());
+        $value = $values->getValue($this->getField());
         return is_int($value) || ctype_digit($value);
     }
 }

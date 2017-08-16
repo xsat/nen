@@ -10,7 +10,7 @@ class Message implements MessageInterface
     /**
      * @var string
      */
-    private $name;
+    private $field;
 
     /**
      * @var string
@@ -20,21 +20,21 @@ class Message implements MessageInterface
     /**
      * Message constructor.
      *
-     * @param string $name
+     * @param string $field
      * @param string $message
      */
-    public function __construct(string $name, string $message)
+    public function __construct(string $field, string $message)
     {
-        $this->name = $name;
+        $this->field = $field;
         $this->message = $message;
     }
 
     /**
      * @return string
      */
-    public function getName(): string
+    public function getField(): string
     {
-        return $this->name;
+        return $this->field;
     }
 
     /**

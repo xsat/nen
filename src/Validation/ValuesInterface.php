@@ -8,9 +8,9 @@ namespace Nen\Validation;
 interface ValuesInterface
 {
     /**
-     * @param string $name
+     * @param string $field
      *
      * @return mixed
      */
-    public function getValue(string $name);
+    public function getValue(string $field);
 }

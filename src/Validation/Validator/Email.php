@@ -16,7 +16,7 @@ class Email extends Validator
      */
     public function validate(ValuesInterface $values): bool
     {
-        $value = $values->getValue($this->getName());
+        $value = $values->getValue($this->getField());
         return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
 }

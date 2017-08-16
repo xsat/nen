@@ -17,13 +17,13 @@ class Range extends Validator
     /**
      * Range constructor.
      *
-     * @param string $name
+     * @param string $field
      * @param array $range
      * @param string $message
      */
-    public function __construct(string $name, array $range, string $message)
+    public function __construct(string $field, array $range, string $message)
     {
-        parent::__construct($name, $message);
+        parent::__construct($field, $message);
         $this->range = $range;
     }
 
@@ -34,7 +34,7 @@ class Range extends Validator
      */
     public function validate(ValuesInterface $values): bool
     {
-        $value = $values->getValue($this->getName());
+        $value = $values->getValue($this->getField());
         return in_array($value, $this->range);
     }
 }

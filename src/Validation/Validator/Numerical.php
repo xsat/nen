@@ -16,7 +16,7 @@ class Numerical extends Validator
      */
     public function validate(ValuesInterface $values): bool
     {
-        $value = $values->getValue($this->getName());
+        $value = $values->getValue($this->getField());
         return preg_match('/^-?\d+\.?\d*$/', $value);
     }
 }

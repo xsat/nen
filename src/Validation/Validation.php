@@ -25,12 +25,6 @@ class Validation implements ValidationInterface
     public function __construct(array $validators = [])
     {
         $this->validators = $validators;
-        $this->init();
-    }
-
-    public function init(): void
-    {
-        // Do nothing...
     }
 
     /**
@@ -77,7 +71,7 @@ class Validation implements ValidationInterface
         ValuesInterface $values
     ): bool
     {
-        $value = $values->getValue($validator->getName());
+        $value = $values->getValue($validator->getField());
 
         return $value === null || $value === '';
     }
