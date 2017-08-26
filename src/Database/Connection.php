@@ -21,6 +21,7 @@ class Connection implements ConnectionInterface
      */
     private static $instance;
 
+
     /**
      * Connection constructor.
      *
@@ -60,11 +61,11 @@ class Connection implements ConnectionInterface
     /**
      * @param QueryInterface $query
      *
-     * @return array
+     * @return array|null
      */
-    public static function selectOne(QueryInterface $query): array
+    public function selectFirst(QueryInterface $query): ?array
     {
-        return self::query($query)->fetch(PDO::FETCH_ASSOC);
+        return self::query($query)->fetch(PDO::FETCH_ASSOC) ?: null;
     }
 
     /**
@@ -72,7 +73,7 @@ class Connection implements ConnectionInterface
      *
      * @return array
      */
-    public static function selectAll(QueryInterface $query): array
+    public function select(QueryInterface $query): array
     {
         return self::query($query)->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -80,9 +81,9 @@ class Connection implements ConnectionInterface
     /**
      * @param QueryInterface $query
      *
-     * @return int
+     * @return bool
      */
-    public static function execute(QueryInterface $query): int
+    public function execute(QueryInterface $query): bool
     {
         return self::query($query)->execute();
     }
@@ -92,9 +93,9 @@ class Connection implements ConnectionInterface
      *
      * @return PDOStatement
      */
-    private static function query(QueryInterface $query): PDOStatement
+    private function query(QueryInterface $query): PDOStatement
     {
-        $stmt = self::getInstance()->getPDO()->prepare($query->getQuery(), [
+        $stmt = $this->pdo->prepare($query->getQuery(), [
             PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY,
         ]);
 
@@ -104,10 +105,20 @@ class Connection implements ConnectionInterface
     }
 
     /**
-     * @return PDO
+     * @return int|null
      */
-    public function getPDO(): PDO
+    public function lastInsetId(): ?int
     {
-        return $this->pdo;
+        return $this->pdo->lastInsertId();
+    }
+
+    /**
+     * @param null|string $text
+     *
+     * @return string
+     */
+    public function quote(?string $text): string
+    {
+        return $this->pdo->quote($text);
     }
 }

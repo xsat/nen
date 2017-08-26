@@ -40,7 +40,20 @@ class Insert extends Query
         parent::__construct('', $binds);
 
         $this->table = $table;
-        $this->columns = $columns;
+        $this->columns = $this->check($columns);
+    }
+
+    /**
+     * @param $columns
+     * @return array
+     */
+    private function check(array $columns): array
+    {
+        if (!is_array(current($columns))) {
+            return [$columns];
+        }
+
+        return $columns;
     }
 
     /**

@@ -14,19 +14,24 @@ interface ConnectionInterface
      *
      * @return array
      */
-    public static function selectOne(QueryInterface $query): array;
+    public function selectFirst(QueryInterface $query): ?array;
 
     /**
      * @param QueryInterface $query
-     *
+     *s
      * @return array
      */
-    public static function selectAll(QueryInterface $query): array;
+    public function select(QueryInterface $query): array;
 
     /**
      * @param QueryInterface $query
      *
-     * @return int
+     * @return bool
      */
-    public static function execute(QueryInterface $query): int;
+    public function execute(QueryInterface $query): bool;
+
+    /**
+     * @return int|null
+     */
+    public function lastInsetId(): ?int;
 }
