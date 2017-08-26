@@ -15,7 +15,7 @@ class Text
      */
     public static function camelize(
         string $text,
-        string $delimiter = ''
+        string $delimiter = '_'
     ): string
     {
         return str_replace(' ', '', ucwords(str_replace($delimiter, ' ', $text)));

@@ -33,8 +33,6 @@ abstract class Model implements ModelInterface
 
             if (method_exists($this, $method)) {
                 $this->{$method}($value);
-            } elseif (property_exists($this, $field)) {
-                $this->{$field} = $value;
             }
         }
     }
