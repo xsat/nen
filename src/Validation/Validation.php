@@ -57,7 +57,7 @@ class Validation implements ValidationInterface
         ValuesInterface $values
     ): bool
     {
-        return !$this->isEmpty($validator, $values)
+        return $this->isEmpty($validator, $values)
             && !$validator->isRequired();
     }
 
