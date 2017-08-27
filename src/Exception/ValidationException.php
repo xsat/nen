@@ -3,6 +3,7 @@
 namespace Nen\Exception;
 
 use Nen\Validation\MessageInterface;
+use Nen\Validation\ValidationInterface;
 
 /**
  * Class ValidationException
@@ -17,11 +18,14 @@ class ValidationException extends Exception
     /**
      * ValidationException constructor.
      *
-     * @param MessageInterface[] $messages
+     * @param ValidationInterface $validation
      */
-    public function __construct(array $messages = [])
+    public function __construct(ValidationInterface $validation)
     {
-        parent::__construct($this->prepareMessages($messages), 400);
+        parent::__construct(
+            $this->prepareMessages($validation->getMessages()),
+            400
+        );
     }
 
     /**
