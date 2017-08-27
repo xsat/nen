@@ -51,6 +51,6 @@ abstract class Binder implements ValuesInterface
             return null;
         }
 
-        return $this->{$method};
+        return $this->{$method}();
     }
 }
