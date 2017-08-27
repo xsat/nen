@@ -2,6 +2,8 @@
 
 namespace Nen\Web;
 
+use Nen\Exception\NotFoundException;
+
 /**
  * Class DefaultController
  */
@@ -12,7 +14,6 @@ class DefaultController extends Controller
      */
     public function notFoundAction(): void
     {
-        $this->response->setStatusCode(404);
-        $this->response->setContent('Page not found');
+        throw new NotFoundException('Page not found');
     }
 }

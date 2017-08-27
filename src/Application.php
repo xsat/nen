@@ -2,7 +2,7 @@
 
 namespace Nen;
 
-use Exception;
+use Nen\Exception\Exception;
 use Nen\Http\ContentInterface;
 use Nen\Http\Request;
 use Nen\Http\RequestInterface;
@@ -56,10 +56,11 @@ class Application
     {
         try {
             $this->dispatcher->dispatch();
-
-            echo $this->response->getContent();
         } catch (Exception $exception) {
-            echo $exception->getMessage();
+            $this->response->setStatusCode($exception->getCode());
+            $this->response->setJsonContent($exception->getData());
         }
+
+        echo $this->response->getContent();
     }
 }
