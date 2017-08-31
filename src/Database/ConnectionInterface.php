@@ -25,10 +25,8 @@ interface ConnectionInterface
 
     /**
      * @param QueryInterface $query
-     *
-     * @return bool
      */
-    public function execute(QueryInterface $query): bool;
+    public function execute(QueryInterface $query): void;
 
     /**
      * @return int|null

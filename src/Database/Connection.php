@@ -62,12 +62,10 @@ class Connection implements ConnectionInterface
 
     /**
      * @param QueryInterface $query
-     *
-     * @return bool
      */
-    public function execute(QueryInterface $query): bool
+    public function execute(QueryInterface $query): void
     {
-        return self::query($query)->execute();
+        self::query($query);
     }
 
     /**
