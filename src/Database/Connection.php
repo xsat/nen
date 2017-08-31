@@ -17,12 +17,6 @@ class Connection implements ConnectionInterface
     private $pdo;
 
     /**
-     * @var Connection
-     */
-    private static $instance;
-
-
-    /**
      * Connection constructor.
      *
      * @param string $host
@@ -30,7 +24,12 @@ class Connection implements ConnectionInterface
      * @param string $user
      * @param string $password
      */
-    private function __construct(string $host, string $database, string $user, string $password)
+    public function __construct(
+        string $host,
+        string $database,
+        string $user,
+        string $password = null
+    )
     {
         $this->pdo = new PDO('mysql:host=' . $host . ';dbname=' . $database, $user, $password, [
             PDO::ATTR_CASE => PDO::CASE_NATURAL,
@@ -39,23 +38,6 @@ class Connection implements ConnectionInterface
             PDO::ATTR_STRINGIFY_FETCHES => false,
             PDO::ATTR_EMULATE_PREPARES => false,
         ]);
-    }
-
-    /**
-     * @return Connection
-     */
-    public static function getInstance(): Connection
-    {
-        if (!static::$instance) {
-            static::$instance = new self(
-                getenv('DB_HOST'),
-                getenv('DB_DATABASE'),
-                getenv('DB_USERNAME'),
-                getenv('DB_PASSWORD')
-            );
-        }
-
-        return static::$instance;
     }
 
     /**
@@ -110,15 +92,5 @@ class Connection implements ConnectionInterface
     public function lastInsetId(): ?int
     {
         return $this->pdo->lastInsertId();
-    }
-
-    /**
-     * @param null|string $text
-     *
-     * @return string
-     */
-    public function quote(?string $text): string
-    {
-        return $this->pdo->quote($text);
     }
 }

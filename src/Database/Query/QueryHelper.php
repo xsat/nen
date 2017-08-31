@@ -2,8 +2,6 @@
 
 namespace Nen\Database\Query;
 
-use Nen\Database\Connection;
-
 /**
  * Class QueryHelper
  */
@@ -29,7 +27,7 @@ class QueryHelper
         if (is_a($value, Expression::class)) {
             return (string)$value;
         } elseif (is_string($value)) {
-            return Connection::getInstance()->quote($value);
+            return '"' . $value . '"';
         } elseif (is_bool($value)) {
             return (int)$value;
         }
