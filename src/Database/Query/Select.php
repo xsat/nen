@@ -15,17 +15,24 @@ class Select extends Query
     /**
      * @var string
      */
+    private $fields;
+
+    /**
+     * @var string
+     */
     private $where;
 
     /**
      * Select constructor.
      *
      * @param string $table
+     * @param string $fields
      * @param string $where
      * @param array $binds
      */
     public function __construct(
         string $table,
+        string $fields,
         string $where = '',
         array $binds = []
     )
@@ -33,6 +40,7 @@ class Select extends Query
         parent::__construct('', $binds);
 
         $this->table = $table;
+        $this->fields = $fields;
         $this->where = $where;
     }
 
@@ -41,7 +49,7 @@ class Select extends Query
      */
     public function getQuery(): string
     {
-        return 'SELECT * ' .
+        return 'SELECT ' . $this->fields .
             ' FROM ' . QueryHelper::quote($this->table) .
             $this->getWhere();
     }
