@@ -37,6 +37,13 @@ interface RequestInterface
 
     /**
      * @param string $name
+     *
+     * @return bool
+     */
+    public function hasHeader(string $name): bool;
+
+    /**
+     * @param string $name
      * @param mixed $default
      *
      * @return mixed
@@ -66,6 +73,14 @@ interface RequestInterface
      * @return mixed
      */
     public function getPut(string $name = null, $default = null);
+
+    /**
+     * @param string $name
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    public function getHeader(string $name = null, $default = null);
 
     /**
      * @return string

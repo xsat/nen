@@ -16,6 +16,33 @@ class Request implements RequestInterface
     public const METHOD_DELETE = 'DELETE';
 
     /**
+     * @var array
+     */
+    private $headers = [];
+
+    /**
+     * Request constructor.
+     */
+    public function __construct()
+    {
+        $this->headers = $this->getHeaders();
+    }
+
+    /**
+     * @return array
+     */
+    private function getHeaders(): array
+    {
+        if (function_exists('getallheaders')) {
+            return getallheaders();
+        } elseif (function_exists('http_get_request_headers')) {
+            return http_get_request_headers();
+        }
+
+        return [];
+    }
+
+    /**
      * Checks whether $_REQUEST has certain index
      *
      * @param string $name
@@ -61,6 +88,17 @@ class Request implements RequestInterface
     public function hasPut(string $name): bool
     {
         return isset($this->getContent()[$name]);
+    }
+
+    /**
+     * Checks whether $headers has certain index
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function hasHeader(string $name): bool
+    {
+        return isset($this->headers[$name]);
     }
 
     /**
@@ -133,6 +171,19 @@ class Request implements RequestInterface
         }
 
         return $data;
+    }
+
+    /**
+     * Gets variable from $headers
+     *
+     * @param string|null $name
+     * @param null $default
+     *
+     * @return mixed
+     */
+    public function getHeader(string $name = null, $default = null)
+    {
+        return !$name ? $this->headers : $this->headers[$name] ?? null;
     }
 
     /**
