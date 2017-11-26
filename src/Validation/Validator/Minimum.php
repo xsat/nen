@@ -35,6 +35,11 @@ class Minimum extends Validator
     public function validate(ValuesInterface $values): bool
     {
         $value = $values->getValue($this->getField());
-        return is_string($value) && mb_strlen($value) >= $this->min;
+
+        if (function_exists('mb_strlen')) {
+            return is_string($value) && mb_strlen($value) >= $this->min;
+        }
+
+        return is_string($value) && strlen($value) >= $this->min;
     }
 }
