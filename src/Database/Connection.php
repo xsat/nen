@@ -23,15 +23,17 @@ class Connection implements ConnectionInterface
      * @param string $database
      * @param string $user
      * @param string $password
+     * @param string $engine
      */
     public function __construct(
         string $host,
         string $database,
         string $user,
-        string $password = null
+        string $password = null,
+        string $engine = 'mysql'
     )
     {
-        $this->pdo = new PDO('mysql:host=' . $host . ';dbname=' . $database, $user, $password, [
+        $this->pdo = new PDO($engine . ':host=' . $host . ';dbname=' . $database, $user, $password, [
             PDO::ATTR_CASE => PDO::CASE_NATURAL,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_ORACLE_NULLS => PDO::NULL_NATURAL,
