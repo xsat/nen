@@ -14,7 +14,7 @@ class QueryHelper
      */
     public static function quote(string $string): string
     {
-        return '`' . $string . '`';
+        return '"' . $string . '"';
     }
 
     /**
