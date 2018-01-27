@@ -11,6 +11,8 @@ class DefaultController extends Controller
 {
     /**
      * 404 page
+     *
+     * @throws NotFoundException
      */
     public function notFoundAction(): void
     {
