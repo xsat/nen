@@ -17,7 +17,7 @@ class QueryHelper
         if (is_a($value, Expression::class)) {
             return (string)$value;
         } elseif (is_string($value)) {
-            return '"' . $value . '"';
+            return '\'' . $value . '\'';
         } elseif (is_bool($value)) {
             return (int)$value;
         }
