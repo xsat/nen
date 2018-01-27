@@ -1,6 +1,6 @@
 <?php
 
-namespace Nen\Database\Query;
+namespace Nen\Database;
 
 /**
  * Class Expression

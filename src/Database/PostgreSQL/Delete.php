@@ -1,6 +1,6 @@
 <?php
 
-namespace Nen\Database\Query;
+namespace Nen\Database\PostgreSQL;
 
 /**
  * Class Delete

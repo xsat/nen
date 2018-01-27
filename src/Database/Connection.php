@@ -2,7 +2,6 @@
 
 namespace Nen\Database;
 
-use Nen\Database\Query\QueryInterface;
 use PDO;
 use PDOStatement;
 

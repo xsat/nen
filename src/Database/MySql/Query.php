@@ -1,6 +1,8 @@
 <?php
 
-namespace Nen\Database\Query;
+namespace Nen\Database\MySql;
+
+use Nen\Database\QueryInterface;
 
 /**
  * Class Query

@@ -2,8 +2,6 @@
 
 namespace Nen\Database;
 
-use Nen\Database\Query\QueryInterface;
-
 /**
  * Interface ConnectionInterface
  */

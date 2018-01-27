@@ -1,22 +1,12 @@
 <?php
 
-namespace Nen\Database\Query;
+namespace Nen\Database;
 
 /**
  * Class QueryHelper
  */
 class QueryHelper
 {
-    /**
-     * @param string $string
-     *
-     * @return string
-     */
-    public static function quote(string $string): string
-    {
-        return '"' . $string . '"';
-    }
-
     /**
      * @param $value
      *
