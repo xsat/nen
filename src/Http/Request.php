@@ -34,12 +34,33 @@ class Request implements RequestInterface
     private function getHeaders(): array
     {
         if (function_exists('getallheaders')) {
-            return getallheaders();
+            $headers = getallheaders();
         } elseif (function_exists('http_get_request_headers')) {
-            return http_get_request_headers();
+            $headers = http_get_request_headers();
+        } else {
+            $headers = [];
         }
 
-        return [];
+        $contentHeaders = [
+            'CONTENT_TYPE' => 'Content-Type',
+            'CONTENT_LENGTH' => 'Content-Length',
+            'CONTENT_MD5' => 'Content-MD5'
+        ];
+
+        foreach ($_SERVER as $name => $value) {
+            if (preg_match('#^HTTP_(.*)$#isu', $name, $match)) {
+                $name = str_replace('_', ' ', $match[1]);
+                $name = strtolower($name);
+                $name = ucwords($name);
+                $name = str_replace(' ', '-', $name);
+
+                $headers[$name] = $value;
+            } elseif (isset($contentHeaders[$name])) {
+                $headers[$contentHeaders[$name]] = $value;
+            }
+        }
+
+        return $headers;
     }
 
     /**
